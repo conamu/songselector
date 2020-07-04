@@ -1,19 +1,27 @@
+// Define variable to store searchterm
+
 let term = '';
 
+// Function that gets the searchinput and does api calls with it when button is pressed
 const updateTerm = () => {
     term = document.getElementById('searchInput').value;
 
+    // if the term is null or an empty string, send an alert
     if(!term || term==''){
     alert('please enter a search Term.')
     } else { 
 
+    // if term is valid, construct a constant with the api key and the search term
     const url = `https://itunes.apple.com/search?term=${term}`
+    // Fetch the contents of the request and parse it to JSON Data.
     fetch(url)
     .then((response) => response.json())
     .then((data) => {
         console.log(data.results);
         const artists = data.results;
 
+        // return the parsed json data matched into valid DOM Modifications 
+        
         return artists.map(result => {
             const outerdiv = document.createElement('div');
             const img = document.createElement('img');
